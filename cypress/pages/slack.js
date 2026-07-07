@@ -3,7 +3,7 @@ import BasePage from './BasePage';
 class SlackPage extends BasePage {
   visitSlack() {
     cy.visit(
-      'https://asyncapi.slack.com/join/shared_invite/zt-3clk6rmc0-Cujl2fChHYnHDUwFKRlQCw#/shared-invite/email',
+      "https://join.slack.com/t/asyncapi/shared_invite/zt-3qi8p8s2u-HxfLFE0Fx~RkpxK5yRBEmA"
     );
   }
 
@@ -60,9 +60,9 @@ class SlackPage extends BasePage {
   }
 
   verifyContinueWithEmail() {
-    cy.get('[data-qa="join_with_email"]')
+    cy.get('input[type="email"]')
       .should('be.visible')
-      .and('have.attr', 'type', 'button');
+      .and('have.attr', 'placeholder', 'name@work-email.com');
   }
 
   verifyPrivacyAndTerms() {

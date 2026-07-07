@@ -15,7 +15,7 @@ describe('Slack workspace tests', () => {
 
       const hasLoginButtons =
         $body.find('[data-qa="base_google_login_button"]').length > 0 ||
-        $body.find('[data-qa="join_with_email"]').length > 0;
+        $body.find('input[type="email"]').length > 0;
 
       if (isInactive || !hasLoginButtons) {
         cy.log('Slack invite link is inactive or login buttons not available - skipping test');
