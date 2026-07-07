@@ -8,6 +8,8 @@ describe('Slack workspace tests', () => {
   });
 
   it('Should show all login methods when the Slack invite link is active', function () {
+    cy.wait(5000);
+
     cy.get('body', { timeout: 10000 }).then(($body) => {
       const isInactive =
         $body.find('.p-refreshed_page__heading').length > 0 &&
@@ -15,7 +17,7 @@ describe('Slack workspace tests', () => {
 
       const hasLoginButtons =
         $body.find('[data-qa="base_google_login_button"]').length > 0 ||
-        $body.find('[data-qa="join_with_email"]').length > 0;
+        $body.find('input[type="email"]').length > 0;
 
       if (isInactive || !hasLoginButtons) {
         cy.log('Slack invite link is inactive or login buttons not available - skipping test');
