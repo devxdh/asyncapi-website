@@ -1,6 +1,6 @@
 import SlackPage from './pages/slack';
 
-const WAIT_PERIOD = 2000;
+const WAIT_DURATION = 2000;
 
 describe('Slack workspace tests', () => {
   const slackPage = new SlackPage();
@@ -20,7 +20,7 @@ describe('Slack workspace tests', () => {
     });
 
     it('Should show all login methods when the Slack invite link is active', function () {
-      cy.wait(WAIT_PERIOD);
+      cy.wait(WAIT_DURATION);
 
       cy.get('body', { timeout: 10000 }).then(($body) => {
         const isInactive =
@@ -56,7 +56,7 @@ describe('Slack workspace tests', () => {
     it('Should correctly display the expired link message when an old link is used', () => {
       const expiredLink = 'https://join.slack.com/t/asyncapi/shared_invite/zt-1invalid-invalid';
       slackPage.visitSlack(expiredLink);
-      cy.wait(WAIT_PERIOD);
+      cy.wait(WAIT_DURATION);
 
       slackPage.verifyInactiveLinkMessage();
     });
