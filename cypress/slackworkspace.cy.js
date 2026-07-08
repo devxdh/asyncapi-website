@@ -1,7 +1,5 @@
 import SlackPage from './pages/slack';
 
-const WAIT_DURATION = 2000;
-
 describe('Slack workspace tests', () => {
   const slackPage = new SlackPage();
   let activeSlackLink = '';
@@ -20,7 +18,7 @@ describe('Slack workspace tests', () => {
     });
 
     it('Should show all login methods when the Slack invite link is active', function () {
-      cy.wait(WAIT_DURATION);
+      cy.get('.p-refreshed_page__heading, [data-qa="email_field"], [data-qa="base_google_login_button"]', { timeout: 15000 }).should('exist');
 
       cy.get('body', { timeout: 10000 }).then(($body) => {
         const isInactive =
@@ -46,7 +44,7 @@ describe('Slack workspace tests', () => {
     });
 
     it('Should show links for Privacy, Contact Us, and Region Change', function () {
-      cy.wait(WAIT_DURATION);
+      cy.get('.p-refreshed_page__heading, [data-qa="email_field"], a[href="/legal"]', { timeout: 15000 }).should('exist');
 
       cy.get('body', { timeout: 10000 }).then(($body) => {
         const isInactive =
@@ -69,7 +67,7 @@ describe('Slack workspace tests', () => {
     it('Should correctly display the expired link message when an old link is used', () => {
       const expiredLink = 'https://join.slack.com/t/asyncapi/shared_invite/zt-1invalid-invalid';
       slackPage.visitSlack(expiredLink);
-      cy.wait(WAIT_DURATION);
+      cy.get('.p-refreshed_page__heading', { timeout: 15000 }).should('exist');
 
       slackPage.verifyInactiveLinkMessage();
     });
