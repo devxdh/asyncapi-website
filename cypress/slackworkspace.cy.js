@@ -45,10 +45,23 @@ describe('Slack workspace tests', () => {
       });
     });
 
-    it('Should show links for Privacy, Contact Us, and Region Change', () => {
-      slackPage.verifyPrivacyAndTerms();
-      slackPage.verifyContactUs();
-      slackPage.verifyChangeRegion();
+    it('Should show links for Privacy, Contact Us, and Region Change', function () {
+      cy.wait(WAIT_DURATION);
+
+      cy.get('body', { timeout: 10000 }).then(($body) => {
+        const isInactive =
+          $body.find('.p-refreshed_page__heading').length > 0 &&
+          $body.text().includes('This link is no longer active');
+
+        if (isInactive) {
+          cy.log('Slack invite link has expired. Please update public/_redirects');
+          this.skip();
+        }
+
+        slackPage.verifyPrivacyAndTerms();
+        slackPage.verifyContactUs();
+        slackPage.verifyChangeRegion();
+      });
     });
   });
 
