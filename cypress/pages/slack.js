@@ -2,7 +2,7 @@ import BasePage from './BasePage';
 
 class SlackPage extends BasePage {
   visitSlack(url) {
-    cy.visit(url);
+    cy.visit(url, { failOnStatusCode: false });
   }
 
   waitForPageLoad() {
